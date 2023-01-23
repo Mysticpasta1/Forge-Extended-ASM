@@ -352,17 +352,14 @@ public final class Plugin implements IMixinConfigPlugin {
 	@Override
 	public List<String> getMixins() {
 		//System.out.println("Have " + mixins);
-		LoadingModList.get().getMods().stream().map(ModInfo::getOwningFile).filter(Objects::nonNull).map(ModFileInfo::getFile).distinct().map(ModFile::getScanResult).collect(Collectors.toList()).stream().flatMap(modData -> modData.getAnnotations().stream()).filter(annotationData -> Objects.equals(annotationData.getAnnotationType(), Type.getType(Asm.class))).map(AnnotationData::getMemberName).flatMap((className) -> {
+		LoadingModList.get().getMods().stream().map(ModInfo::getOwningFile).filter(Objects::nonNull).map(ModFileInfo::getFile).distinct().map(ModFile::getScanResult).collect(Collectors.toList()).stream().flatMap(modData -> modData.getAnnotations().stream()).filter(annotationData -> Objects.equals(annotationData.annotationType(), Type.getType(Asm.class))).map(AnnotationData::memberName).flatMap((className) -> {
 			try {
 				return Stream.of((Runnable) Class.forName(className).asSubclass(Runnable.class).getConstructor(new Class[0]).newInstance(new Object[0]));
 			} catch (Exception e) {
 				MM.LOGGER.error("Failed to load {} Plugin: {}", className, e);
 				return Stream.empty();
 			}
-		}).forEach((runnable) -> {
-			runnable.run();
-		});
-		//System.out.println("Now have " + mixins);
+		}).forEach(Runnable::run);
 		if (!enumStructParents.isEmpty()) {
 			for (Entry<String, String> entry : enumStructParents.entrySet()) {
 				ClassTinkerers.addReplacement(entry.getKey(), EnumSubclasser.makeStructFixer(entry.getKey(), entry.getValue()));
@@ -382,7 +379,6 @@ public final class Plugin implements IMixinConfigPlugin {
 
 	@Override
 	public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
-		//System.out.println("Pre-applying " + targetClassName + " via " + mixinClassName);
 
 		Set<Consumer<ClassNode>> transformations = classModifiers.get(targetClassName.replace('.', '/'));
 		if (transformations != null) {

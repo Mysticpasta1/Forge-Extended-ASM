@@ -77,7 +77,7 @@ public enum ClassTinkerers {
 	}
 
 	/**
-	 * Define a class with the given {@link name} by the given {@link contents} if it doesn't already exist
+	 * Define a class with the given name by the given contents if it doesn't already exist
 	 * <p><b>Behaviour is undefined if the target class name is already class loaded</b>
 	 *
 	 * @param name The name of the class to define
@@ -98,18 +98,18 @@ public enum ClassTinkerers {
 	}
 
 	/**
-	 * Add a class replacer for the given class {@link target} to allow totally replacing bytecode during definition.
+	 * Add a class replacer for the given class target to allow totally replacing bytecode during definition.
 	 * <p><b>Does nothing if the target class is already defined</b>
 	 *
 	 * <p>This method is designed when the bulk or entirety of the target class is going to be replaced by the
 	 * {@code replacer}. For more modest changes {@link #addTransformation(String, Consumer)} is strongly recommended.
 	 *
-	 * <p>No Mixins or {@link #addTransformation(String, Consumer) transformations} will have applied when the
-	 * {@code replacer} is given the {@link ClassNode}. Subsequently only one replacement for a given class can be registered,
+	 * <p>No Mixins or {@link #addTransformation(String, Consumer)} transformations will have applied when the
+	 * replacer is given the {@link ClassNode}. Subsequently only one replacement for a given class can be registered,
 	 * attempting to register more will result in an {@link IllegalStateException}.
 	 *
 	 * @param target The name of the class to be replaced
-	 * @param transformer A {@link Consumer} to take the target class's unmodified {@link ClassNode} replace the contents
+	 * transformer A {@link Consumer} to take the target class's unmodified {@link ClassNode} replace the contents
 	 *
 	 * @throws NullPointerException If target is {@code null}
 	 * @throws IllegalArgumentException If replacer is {@code null}
@@ -130,13 +130,13 @@ public enum ClassTinkerers {
 	}
 
 	/**
-	 * Add a class transformer for the given class {@link target} to allow modifying the bytecode during definition.
+	 * Add a class transformer for the given class target to allow modifying the bytecode during definition.
 	 * <p><b>Does nothing if the target class is already defined</b>
 	 *
-	 * <p>This method is designed when certain elements of the target class are changed by the {@code transformer}.
+	 * <p>This method is designed when certain elements of the target class are changed by the transformer.
 	 * For more drastic changes {@link #addReplacement(String, Consumer)} might prove beneficial.
 	 *
-	 * <p>Any {@link #addReplacement(String, Consumer) replacement} will have applied before the {@code transformer}
+	 * <p>Any {@link #addReplacement(String, Consumer)} replacement will have applied before the transformer
 	 * is given the {@link ClassNode}. Any number of other Mixins or transformations could have applied also so care
 	 * should be taken that the target of the transformation is as expected.
 	 *
