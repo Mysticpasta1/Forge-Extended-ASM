@@ -15,11 +15,11 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '2.2.0'
+version = '2.2.2'
 group = 'com.chocohead.mm' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'mm'
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.17'
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '17'
 
 minecraft {
     mappings channel: 'official', version: '1.19.2'

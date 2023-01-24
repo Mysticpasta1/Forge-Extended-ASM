@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[32,)"
+loaderVersion="[43,)"
 license="CC0 1.0 Universal"
 issueTrackerURL="https://github.com/ludocrypt/Forge-Extended-ASM/issues"
 [[mods]]
@@ -8,8 +8,8 @@ version="${file.jarVersion}"
 displayName="Forge Extended ASM"
 displayURL="https://discord.gg/bbhS2vy"
 logoFile="mm.png"
-credits="Chocohead, LudoCrypt"
-authors="Chocohead, LudoCrypt"
+credits="Chocohead, LudoCrypt, Mysticpasta1"
+authors="Chocohead, LudoCrypt, Mysticpasta1"
 description='''
 Dont blame me if it doesnt work !
 '''
@@ -17,12 +17,12 @@ Dont blame me if it doesnt work !
 [[dependencies.forgeextendedasm]]
 modId="forge"
 mandatory=true
-versionRange="[32,)"
+versionRange="[43,)"
 ordering="NONE"
 side="BOTH"
 [[dependencies.forgeextendedasm]]
 modId="minecraft"
 mandatory = true
-versionRange = "[1.0.0,1.17)"
+versionRange = "[1.19.2, 1.20)"
 ordering = "NONE"
 side="BOTH"
